@@ -1,0 +1,4 @@
+[
+  { "first": "Taro", "last": "Yamada", "age": 30, "dept": "Sales" },
+  { "first": "Hanako", "last": "Sato", "age": 25, "dept": "Dev" }
+]

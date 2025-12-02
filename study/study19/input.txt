@@ -1,0 +1,7 @@
+[
+  {"name": "Taro",  "age": 28, "dept": "Sales"},
+  {"name": "Hanako","age": 35, "dept": "Dev"},
+  {"name": "Ken",   "age": 30, "dept": "Dev"},
+  {"name": "Miki",  "age": 42, "dept": "HR"},
+  {"name": "Jun",   "age": 30, "dept": "Sales"}
+]

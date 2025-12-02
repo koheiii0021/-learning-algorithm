@@ -1,0 +1,7 @@
+[
+  {"user": "alice", "start": "09:00", "end": "10:30"},
+  {"user": "bob",   "start": "09:15", "end": "09:45"},
+  {"user": "alice", "start": "11:00", "end": "12:00"},
+  {"user": "carol", "start": "10:00", "end": "13:00"},
+  {"user": "bob",   "start": "10:00", "end": "11:00"}
+]

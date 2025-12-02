@@ -1,0 +1,8 @@
+[
+  {"user": "alice", "action": "login"},
+  {"user": "bob",   "action": "view"},
+  {"user": "alice", "action": "view"},
+  {"user": "alice", "action": "logout"},
+  {"user": "bob",   "action": "login"},
+  {"user": "carol", "action": "login"}
+]

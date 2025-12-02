@@ -1,0 +1,7 @@
+[
+  {"date": "2025-11-20", "path": "/articles/js",     "views": 120},
+  {"date": "2025-11-20", "path": "/articles/css",    "views": 80},
+  {"date": "2025-11-21", "path": "/articles/js",     "views": 200},
+  {"date": "2025-11-21", "path": "/articles/react",  "views": 150},
+  {"date": "2025-11-19", "path": "/articles/js",     "views": 50}
+]

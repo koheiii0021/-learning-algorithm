@@ -1,0 +1,9 @@
+[
+  {"path": "/api/users",   "method": "GET",  "status": 200},
+  {"path": "/api/users",   "method": "POST", "status": 201},
+  {"path": "/api/users",   "method": "GET",  "status": 200},
+  {"path": "/api/items",   "method": "GET",  "status": 200},
+  {"path": "/api/users",   "method": "GET",  "status": 500},
+  {"path": "/api/items",   "method": "POST", "status": 400},
+  {"path": "/api/items",   "method": "GET",  "status": 200}
+]

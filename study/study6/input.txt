@@ -1,0 +1,4 @@
+name,age,city
+Taro,21,Tokyo
+Hanako,25,Osaka
+Ken,19,Nagoya

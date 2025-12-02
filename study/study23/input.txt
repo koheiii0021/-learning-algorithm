@@ -1,0 +1,7 @@
+[
+  {"name": "Apple",  "category": "Fruit",     "stock": 10},
+  {"name": "Banana", "category": "Fruit",     "stock": 5},
+  {"name": "Carrot", "category": "Vegetable", "stock": 8},
+  {"name": "Onion",  "category": "Vegetable", "stock": 3},
+  {"name": "Milk",   "category": "Dairy",     "stock": 4}
+]

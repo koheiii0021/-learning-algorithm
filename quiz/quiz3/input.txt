@@ -1,0 +1,8 @@
+{
+  "team": "Dev",
+  "members": [
+    { "name": "Taro", "skills": ["JS", "HTML"] },
+    { "name": "Hanako", "skills": ["Python", "ML"] },
+    { "name": "Ken", "skills": ["Go", "AWS", "Infra"] }
+  ]
+}

@@ -1,0 +1,6 @@
+[
+  {"name": "A", "score": 82, "passed": true},
+  {"name": "B", "score": 45, "passed": false},
+  {"name": "C", "score": 90, "passed": true},
+  {"name": "D", "score": 60, "passed": false}
+]

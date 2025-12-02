@@ -1,0 +1,7 @@
+[
+  {"title": "Intro to JS",       "tags": ["js", "basic"],        "views": 120},
+  {"title": "Advanced JS",       "tags": ["js", "advanced"],     "views": 300},
+  {"title": "Web Basics",        "tags": ["html", "css", "js"],  "views": 200},
+  {"title": "CSS Layout",        "tags": ["css"],                "views": 180},
+  {"title": "No Tag Article",    "tags": [],                     "views": 50}
+]

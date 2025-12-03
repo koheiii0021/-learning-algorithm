@@ -21,7 +21,7 @@ function canFinish(X) {
         }
     }
 
-    return days <= X;
+    return days <= D;
 }
 
 let low = 0;

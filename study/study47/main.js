@@ -2,52 +2,29 @@ const fs = require("fs");
 const input = fs.readFileSync(0, "utf8").trim().split("\n");
 
 const [N, Q] = input[0].split(" ").map(Number);
-const A = input[1].split(" ").map(Number);
-const queries = input.slice(2).map(Number);
+const parent = Array.from({ length: N}, (_, i) => i);
 
-function lowerBound(arr, target){
-    let left = 0;
-    let right = arr.length;
-
-    while(left < right){
-        const mid = Math.floor((left + right) / 2);
-        const value = arr[mid];
-
-        if(value >= target){
-            right = mid;
-        } else {
-            left = mid + 1;
-        }
-    }
-    return left;
+function find(x) {
+    return parent[x] === x ? x : find(parent[x]);
 }
 
-function upperBound(arr, target){
-    let left = 0;
-    let right = arr.length;
-
-    while(left < right){
-        const mid = Math.floor((left + right) / 2);
-        const value = arr[mid];
-
-        if(value > target){
-            right = mid;
-        } else {
-            left = mid + 1;
-        }
+function union(x, y) {
+    const rootX = find(x);
+    const rootY = find(y);
+    if(rootX !== rootY){
+        parent[rootX] = rootY;
     }
-    return left;
 }
 
-const result = [];
+function same(x, y) {
+    return find(x) === find(y);
+}
 
 for(let i = 0; i < Q; i++){
-    const x = queries[i];
-    const leftIdx = lowerBound(A, x);
-    const rightIdx = upperBound(A, x);
+    const [op, a, b] = input[i + 1].split(" ").map(Number);
+    if(op === 0) union(a, b);
 
-    const count = rightIdx - leftIdx;  
-    result.push(count);  
+    if(op === 1){
+        same(a, b) ? console.log("Yes") : console.log("No");
+    }
 }
-
-console.log(result.join("\n")) //easy

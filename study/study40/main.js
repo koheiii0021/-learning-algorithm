@@ -8,10 +8,10 @@ const visited = Array.from({ length: H }, () => Array(W).fill(false));
 function dfs(r, c) {
     visited[r][c] = true;
 
-    const dr = [-1, 1, 0, 0];
-    const dc = [0, 0, -1, 1];
+    const dr = [-1, -1, -1, 0, 0, 1, 1, 1];
+    const dc = [-1, 0, 1, -1, 1, -1, 0, 1];
 
-    for(let k = 0; k < 4; k++){
+    for(let k = 0; k < 8; k++){
         const nr = r + dr[k];
         const nc = c + dc[k];
 

@@ -3,12 +3,19 @@ const input = fs.readFileSync(0, "utf8").trim().split("\n");
 
 const [H, W] = input[0].split(" ").map(Number);
 const grid = input.slice(1).map(row => row.trim().split(""));
-const visited = Array.from({ length: H}, () => Array(W).fill(false));
+const dist = Array.from({ length: H}, () => Array(W).fill(-1));
 
-function bfs(sr, sc) {
+function multiBfs() {
     const queue = [];
-    queue.push([sr, sc]);
-    visited[sr][sc] = true;
+
+    for(let r = 0; r < H; r++){
+        for(let c = 0; c < W; c++){
+            if(grid[r][c] === "E"){
+                queue.push([r, c]);
+                dist[r][c] = 0;
+            }
+        }
+    }
 
     const dr = [-1, 1, 0, 0];
     const dc = [0, 0, -1, 1];
@@ -22,23 +29,26 @@ function bfs(sr, sc) {
 
             if(nr < 0 || nr >= H || nc < 0 || nc >= W) continue;
 
-            if(grid[nr][nc] === "#" && !visited[nr][nc]){
-                visited[nr][nc] = true;
-                queue.push([nr, nc]);
-            }
+            if(grid[nr][nc] === "#") continue;
+            if(dist[nr][nc] !== -1) continue;
+
+            dist[nr][nc] = dist[r][c] + 1;
+            queue.push([nr, nc]);
         }
     }
 }
 
-let count = 0;
+multiBfs();
 
+let pr, pc;
 for(let r = 0; r < H; r++){
     for(let c = 0; c < W; c++){
-        if(grid[r][c] === "#" && !visited[r][c]){
-            count++;
-            bfs(r, c);
+        if(grid[r][c] === "P"){
+            pr = r;
+            pc = c;
         }
     }
 }
 
-console.log(count);
+console.log(dist[pr][pc])
+

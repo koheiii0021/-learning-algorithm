@@ -1,53 +1,33 @@
 const fs = require("fs");
 const input = fs.readFileSync(0, "utf8").trim().split("\n");
 
-const [N, Q] = input[0].split(" ").map(Number);
-const A = input[1].split(" ").map(Number);
-const queries = input.slice(2).map(Number);
+const [N, M] = input[0].split(" ").map(Number);
+const graph = Array.from({ length: N }, () => []);
 
-function lowerBound(arr, target){
-    let left = 0;
-    let right = arr.length;
+const INF = Infinity;
+const dist = Array(N).fill(INF);
+dist[0] = 0;
 
-    while(left < right){
-        const mid = Math.floor((left + right) / 2);
-        const value = arr[mid];
+for(let i = 0; i < M; i++){
+    const [a, b, c] = input[i + 1].split(" ").map(Number);
+    graph[a].push([b, c]);
+    graph[b].push([a, c]);
+}
 
-        if(value >= target){
-            right = mid;
-        } else {
-            left = mid + 1;
+const pq = [];
+pq.push([0, 0]);
+
+
+while(pq.length > 0){
+    pq.sort((a, b) => a[0] - b[0]);
+    const [d, v] = pq.shift();
+
+    if(d > dist[v]) continue;
+    
+    for(const [next, weight] of graph[v]){
+        if(dist[v] + weight < dist[next]){
+            dist[next] = dist[v] + weight;
+            pq.push(dist[next], next);
         }
     }
-    return left;
 }
-
-function upperBound(arr, target){
-    let left = 0;
-    let right = arr.length;
-
-    while(left < right){
-        const mid = Math.floor((left + right) / 2);
-        const value = arr[mid];
-
-        if(value > target){
-            right = mid;
-        } else {
-            left = mid + 1;
-        }
-    }
-    return left;
-}
-
-const result = [];
-
-for(let i = 0; i < Q; i++){
-    const x = queries[i];
-    const leftIdx = lowerBound(A, x);
-    const rightIdx = upperBound(A, x);
-
-    const count = rightIdx - leftIdx;  
-    result.push(count);  
-}
-
-console.log(result.join("\n")) //easy

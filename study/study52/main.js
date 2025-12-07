@@ -1,53 +1,23 @@
 const fs = require("fs");
 const input = fs.readFileSync(0, "utf8").trim().split("\n");
 
-const [N, Q] = input[0].split(" ").map(Number);
-const A = input[1].split(" ").map(Number);
-const queries = input.slice(2).map(Number);
+const N = Number(input[0]);
+const dp = Array(N + 1).fill(0);
 
-function lowerBound(arr, target){
-    let left = 0;
-    let right = arr.length;
+dp[0] = 0;
 
-    while(left < right){
-        const mid = Math.floor((left + right) / 2);
-        const value = arr[mid];
+for(let i = 1; i <= N; i++){
+    let minCoins = dp[i - 1];
 
-        if(value >= target){
-            right = mid;
-        } else {
-            left = mid + 1;
-        }
+    if(i >= 5){
+        minCoins = Math.min(minCoins, dp[i - 5]);
     }
-    return left;
-}
 
-function upperBound(arr, target){
-    let left = 0;
-    let right = arr.length;
-
-    while(left < right){
-        const mid = Math.floor((left + right) / 2);
-        const value = arr[mid];
-
-        if(value > target){
-            right = mid;
-        } else {
-            left = mid + 1;
-        }
+    if(i >= 10){
+        minCoins = Math.min(minCoins, dp[i - 10]);
     }
-    return left;
+
+    dp[i] = minCoins + 1;
 }
 
-const result = [];
-
-for(let i = 0; i < Q; i++){
-    const x = queries[i];
-    const leftIdx = lowerBound(A, x);
-    const rightIdx = upperBound(A, x);
-
-    const count = rightIdx - leftIdx;  
-    result.push(count);  
-}
-
-console.log(result.join("\n")) //easy
+console.log(dp[N])

@@ -17,19 +17,18 @@ for(let i = 0; i < M; i++){
 const pq = [];
 pq.push([0, 0]);
 
-
 while(pq.length > 0){
     pq.sort((a, b) => a[0] - b[0]);
     const [d, v] = pq.shift();
 
     if(d > dist[v]) continue;
-    
+
     for(const [next, weight] of graph[v]){
         if(dist[v] + weight < dist[next]){
             dist[next] = dist[v] + weight;
-            pq.push(dist[next], next);
+            pq.push([dist[next], next]);
         }
     }
 }
 
-console.log(dist[N - 1] === INF ? -1 : dist[N - 1]);
+console.log(dist[N - 1] === INF ? -1 : dist[N- 1]);

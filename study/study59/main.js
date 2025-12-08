@@ -1,53 +1,24 @@
 const fs = require("fs");
 const input = fs.readFileSync(0, "utf8").trim().split("\n");
 
-const [N, Q] = input[0].split(" ").map(Number);
-const A = input[1].split(" ").map(Number);
-const queries = input.slice(2).map(Number);
+const [N, S] = input[0].split(" ").map(Number);
+const a = input[1].split(" ").map(Number);
 
-function lowerBound(arr, target){
-    let left = 0;
-    let right = arr.length;
+let left = 0;
+let sum = 0;
+let maxLen = 0;
 
-    while(left < right){
-        const mid = Math.floor((left + right) / 2);
-        const value = arr[mid];
+//右を伸ばす
+for(let right = 0; right < N; right++){
+    sum += a[right];
 
-        if(value >= target){
-            right = mid;
-        } else {
-            left = mid + 1;
-        }
+    //合計がSを超えたら
+    while(sum > S){
+        sum -= a[left];
+        left++;
     }
-    return left;
+
+    maxLen = Math.max(maxLen, right - left + 1);
 }
 
-function upperBound(arr, target){
-    let left = 0;
-    let right = arr.length;
-
-    while(left < right){
-        const mid = Math.floor((left + right) / 2);
-        const value = arr[mid];
-
-        if(value > target){
-            right = mid;
-        } else {
-            left = mid + 1;
-        }
-    }
-    return left;
-}
-
-const result = [];
-
-for(let i = 0; i < Q; i++){
-    const x = queries[i];
-    const leftIdx = lowerBound(A, x);
-    const rightIdx = upperBound(A, x);
-
-    const count = rightIdx - leftIdx;  
-    result.push(count);  
-}
-
-console.log(result.join("\n")) //easy
+console.log(maxLen);

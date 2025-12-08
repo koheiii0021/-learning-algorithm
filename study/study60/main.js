@@ -1,53 +1,42 @@
 const fs = require("fs");
 const input = fs.readFileSync(0, "utf8").trim().split("\n");
 
-const [N, Q] = input[0].split(" ").map(Number);
-const A = input[1].split(" ").map(Number);
-const queries = input.slice(2).map(Number);
+const [H, W] = input[0].split(" ").map(Number);
+const grid = input.slice(1, 1 + H).map(row => row.trim().split(""));
+const dist = Array.from({ length: H }, () => Array(W).fill(-1));
 
-function lowerBound(arr, target){
-    let left = 0;
-    let right = arr.length;
 
-    while(left < right){
-        const mid = Math.floor((left + right) / 2);
-        const value = arr[mid];
-
-        if(value >= target){
-            right = mid;
-        } else {
-            left = mid + 1;
-        }
+//Start Goal
+let sr, sc, gr, gc;
+for(let r = 0; r < H; r++){
+    for(let c = 0; c < W; c++){
+        if(grid[r][c] === "S"){ sr = r; sc = c; }
+        if(grid[r][c] === "G"){ gr = r; gc = c; }
     }
-    return left;
 }
 
-function upperBound(arr, target){
-    let left = 0;
-    let right = arr.length;
+const dr = [-1, 1, 0, 0];
+const dc = [0, 0, -1, 1];
 
-    while(left < right){
-        const mid = Math.floor((left + right) / 2);
-        const value = arr[mid];
+const queue = [];
+queue.push([sr, sc]);
+dist[sr][sc] = 0;
 
-        if(value > target){
-            right = mid;
-        } else {
-            left = mid + 1;
-        }
+
+while(queue.length > 0){
+    const [r, c] = queue.shift();
+
+    for(let k = 0; k < 4; k++){
+        const nr = r + dr[k];
+        const nc = c + dc[k];
+
+        if(nr < 0 || nr >= H || nc < 0 || nc >= W ) continue;
+        if(grid[nr][nc] === "#") continue;
+        if(dist[nr][nc] !== -1) continue;
+
+        dist[nr][nc] = dist[r][c] + 1;
+        queue.push([nr, nc]);
     }
-    return left;
 }
 
-const result = [];
-
-for(let i = 0; i < Q; i++){
-    const x = queries[i];
-    const leftIdx = lowerBound(A, x);
-    const rightIdx = upperBound(A, x);
-
-    const count = rightIdx - leftIdx;  
-    result.push(count);  
-}
-
-console.log(result.join("\n")) //easy
+console.log(dist[gr][gc])
